@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Health Advisor </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+
+.navbar-inverse
+{
+  background-color:#6EC898;
+  padding: 20px;
+  text-align: center;
+  
+}
+.navbar {
+    color: #FFFFFF;
+  
+}
+.navbar-nav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+</style>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Medical Clinic</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">HOME</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">INFORMATION<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="Causes.html">CAUSES</a></li>
+          <li><a href="Treatment.html">TREATMENTS</a></li>
+          <li><a href="Precautions.html">PRECAUTIONS</a></li>
+        </ul>
+      </li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">HELP DESK<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="GovernmentSchemes.html">GOVERNMENT SCHEMES</a></li>
+          <li><a href="Ngos.html">NGO'S</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Q & A</a></li>
+      <li><a href="#">ABOUT US</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+<h2 align="center">PLEASE ENTER DETAILS</h2>
+<div style="width:800px; margin:0 auto;">
+  <form  method="POST">
+  
+    <div class="form-group" >
+      
+      <input type="number"  step="0.001" class="form-control" id="age" placeholder="Age" name="age">
+    </div>
+    <div class="form-group">
+     
+      <input type="number"  step="0.001" class="form-control" id="bmi" placeholder="BMI" name="bmi">
+    </div>
+       <div class="form-group">
+     
+      <input type="number"  step="0.001" class="form-control" id="glucose" placeholder="Glucose" name="glucose">
+    </div>
+     <div class="form-group">
+   
+      <input type="number"  step="0.001" class="form-control" id="insulin" placeholder="Insulin" name="insulin">
+    </div>
+     <div class="form-group">
+     
+      <input type="number"  step="0.001" class="form-control" id="homa" placeholder="HOMA" name="homa">
+    </div>
+     <div class="form-group">
+     
+      <input type="number"  step="0.001" class="form-control" id="leptin" placeholder="Leptin" name="leptin">
+    </div>
+     <div class="form-group">
+     
+      <input type="number"  step="0.001" class="form-control" id="adiponectin" placeholder="Adiponectin" name = "adiponectin">
+    </div>
+     <div class="form-group">
+     
+      <input type="number"  step="0.001" class="form-control" id="resistin" placeholder="Resistin" name="resistin">
+    </div>
+     <div class="form-group">
+     
+      <input type="number"  step="0.001" class="form-control" id="mcp1" placeholder="MCP-1" name="mcp1">
+    </div>
+    <button type="button" id="predict_btn" class="btn btn-primary">PREDICT</button>
+  </form>
+</div>
+</div>
+</body>
+<script>
+ $("#predict_btn").click(function() {
+   var data = {
+    age : $("#age").val(),
+    bmi : $("#bmi").val(),
+    glucose : $("#glucose").val(),
+    insulin : $("#insulin").val(),
+    homa : $("#homa").val(),
+    leptin : $("#leptin").val(),
+    adiponectin : $("#adiponectin").val(),
+    resistin : $("#resistin").val(),
+    mcp1 : $("#mcp1").val()
+  }
+  console.log(data);
+  $.ajax({ 
+    url: '/predict',
+    data: data,
+    type: 'POST',
+    dataType: "json",
+    success: function(response) {
+        alert(response.message);
+      }
+  });
+}); 
+</script>
+</html>
